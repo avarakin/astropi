@@ -6,10 +6,13 @@ List of features:
 * Kstars
 * PHD2
 * CCDCiel
+* Skychart
+* Astrometry with sextractor
 2. Sets up Wireless Access Point. Default name is RPI and password is password but can be changed in the script. Once connected to WAP,  IP address of PI is 10.0.0.1
 3. Sets up x11vnc to be started automatically
 4. Configures screen to be 1920x1080 for headless operation
 5. Configures USB to provide up to 1A of current to connected devices
+6. Configures the onboard serial port for controlling an external device
 
 Steps for setting up:
 1. Download and install Ubuntu Mate 16.04 from:
