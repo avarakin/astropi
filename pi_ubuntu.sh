@@ -1,7 +1,3 @@
-#on host machine execute
-#xz -d ubuntu-mate-16.04.2-desktop-armhf-raspberry-pi.img.xz
-#sudo dd if=ubuntu-mate-16.04.2-desktop-armhf-raspberry-pi.img of=/dev/sdd bs=8M status=progress
-
 sudo apt-get update
 
 sudo apt-get -y install mc git vim ssh x11vnc hostapd dnsmasq zsh synaptic fonts-roboto chromium-browser terminator
