@@ -17,4 +17,10 @@ https://ubuntu-mate.org/raspberry-pi/
 Follow instructions up to SSH section. The script contains commands for enabling ssh too. 
 2. Once Raspberry is running, open command line and run the following commands
 sudo apt-get install git
-git 
+git clone https://github.com/avarakin/astropi.git
+cd astropi
+cat pi_ubuntu.sh
+chmod 777 pi_ubuntu.sh
+
+Once this is done, you can either run the whole script or copy - paste the commands to terminal one by one
+
