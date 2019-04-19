@@ -29,3 +29,15 @@ cat pi_ubuntu.sh
 
 3. Once this is done, you can either run the whole script or copy - paste the commands to terminal one by one. At this point the script is still in testing stage, so it is recommended to run it line by line. When you run it line by line, make sure that the whole command is copied to buffer - some commands span over multiple lines or are a long single line.
 
+
+Instructions for 18.04
+
+Download on this page:
+
+https://ubuntu-mate.org/download/
+
+https://ubuntu-mate.org/raspberry-pi/ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img.xz
+
+sudo apt-get install gddrescue xz-utils
+unxz ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img.xz
+sudo ddrescue -D --force ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img /dev/sdx
