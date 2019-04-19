@@ -1,6 +1,6 @@
 This project contains instructions and shell script for setting up a Raspberry Pi as an Astrophotography computer.
 
-List of features:
+## List of features:
 1. Installs most commonly used Astrophotography software:
 * INDI
 * Kstars
@@ -14,7 +14,7 @@ List of features:
 5. Configures USB to provide up to 1A of current to connected devices
 6. Configures the onboard serial port for controlling an external device
 
-Steps for setting up:
+## Steps for setting up:
 1. Download and install Ubuntu Mate 16.04 from:
 https://ubuntu-mate.org/raspberry-pi/
 Follow instructions up to SSH section. The script contains commands for enabling ssh too. 
@@ -30,7 +30,7 @@ cat pi_ubuntu.sh
 3. Once this is done, you can either run the whole script or copy - paste the commands to terminal one by one. At this point the script is still in testing stage, so it is recommended to run it line by line. When you run it line by line, make sure that the whole command is copied to buffer - some commands span over multiple lines or are a long single line.
 
 
-Instructions for 18.04
+## Instructions for 18.04
 
 Download on this page:
 
