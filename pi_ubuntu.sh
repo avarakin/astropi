@@ -99,11 +99,3 @@ sudo sh -c "echo dtoverlay=pi3-disable-bt >> /boot/config.txt"
 sudo systemctl stop hciuart
 sudo systemctl disable hciuart
 
-
-
-sudo wget -qO - https://packagecloud.io/headmelted/codebuilds/gpgkey | sudo apt-key add -;
-echo "https://packagecloud.io/headmelted/codebuilds/raspbian/ jessie main" >> /etc/apt/sources.list
-sudo apt-get update
-sudo apt-get install code-oss
-
-
