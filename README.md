@@ -1,9 +1,8 @@
-#Introduction
+## Introduction
 
 This project contains instructions and shell script for setting up a Raspberry Pi as an Astrophotography computer.
 Both 18.4 and 16.04 versions of Ubuntu Mate are supported.
-This project also has experimental installer, implemented as a make file. It looks promising but needs furhter testing.
-
+This project also has experimental installer, implemented as a make file. 
 
 ## List of features:
 1. Installs most commonly used Astrophotography software:
@@ -36,4 +35,9 @@ cat pi_ubuntu.sh
 
 
 ## Notes for 18.04
+Couple of things required changes in the script to support 18.04:
+1. For some reason the ssh keys were not present after the install so the script has the steps to create them.
+2. Ubuntu 18.04 comes with its own DNS server which conflicts with dnsmasq. The script has commands for disabling the DNS server and changing resolv.conf to be compatible with dnsmasq
+
+
 
