@@ -46,16 +46,11 @@ chmod 777 ~/indi.sh
 #sudo systemctl disable systemd-resolved
 #sudo rm /etc/resolv.conf
 #sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
-
-sudo apt-get -y install hostapd dnsmasq make
-
-#The following commands were needed to get dnsmasq running on 18.04:
-#sudo sed -i.bak 's/#DNSStubListener=yes/DNSStubListener=no/' /etc/systemd/resolved.conf
-#sudo systemctl reload-or-restart systemd-resolved
-#sudo systemctl reload-or-restart dnsmasq
 #sudo chattr -e /etc/resolv.conf
 #sudo chattr +i /etc/resolv.conf
 
+
+sudo apt-get -y install hostapd dnsmasq make
 
 
 cd ~ && git clone https://github.com/oblique/create_ap && cd create_ap && sudo make install
@@ -103,3 +98,12 @@ sudo sed -i.bak 's/console=serial0,115200//'  /boot/cmdline.txt
 sudo sh -c "echo dtoverlay=pi3-disable-bt >> /boot/config.txt"
 sudo systemctl stop hciuart
 sudo systemctl disable hciuart
+
+
+
+sudo wget -qO - https://packagecloud.io/headmelted/codebuilds/gpgkey | sudo apt-key add -;
+echo "https://packagecloud.io/headmelted/codebuilds/raspbian/ jessie main" >> /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get install code-oss
+
+
