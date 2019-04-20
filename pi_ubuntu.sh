@@ -1,15 +1,27 @@
 sudo apt-get update
+sudo apt-get upgrade
 
-sudo apt-get -y install mc git vim ssh x11vnc hostapd dnsmasq zsh synaptic fonts-roboto chromium-browser terminator
+#install general utilities
+sudo apt-get -y install mc git vim ssh x11vnc zsh synaptic fonts-roboto chromium-browser terminator
 
 #enable ssh
 sudo systemctl enable ssh
+sudo systemctl start ssh
+sudo systemctl status ssh
+
+
+#There steps were needed on 18.04 to get sshd working. Uncomment and run in case if you face same issue
+#sudo rm /etc/ssh/ssh*key
+#sudo dpkg-reconfigure openssh-server
+#sudo systemctl restart ssh
+#sudo systemctl status ssh
+
 
 #install indi and kstars
 sudo apt-add-repository ppa:mutlaqja/ppa
 sudo apt-get update
 sudo apt-get -y install indi-full kstars-bleeding
-sudo apt-get -y install astrometry.net astrometry-data-tycho2-09 astrometry-data-tycho2-08 sextractor
+sudo apt-get -y install astrometry.net astrometry-data-tycho2 astrometry-data-2mass-08-19 astrometry-data-2mass-08-19 astrometry-data-2mass-07 astrometry-data-2mass-06 sextractor
 
 #install ccdciel and skychart
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA716FC2
@@ -18,30 +30,47 @@ sudo apt-get update && sudo apt-get -y install ccdciel skychart
 
 
 #install phd2
-sudo add-apt-repository ppa:pch/phd2 && sudo apt-get update && sudo apt-get -y install phd2
+sudo add-apt-repository ppa:pch/phd2 && sudo apt-get update && sudo apt-get -y install phd2 phdlogview
 
 
 #create a sample INDI startup shell script
-echo "indiserver -v -f  /tmp/fifo indi_lx200_OnStep indi_sbig_ccd indi_dsi_ccd indi_sx_wheel" >> /home/pi/indi.sh
-chmod 777 /home/pi/indi.sh
+echo "indiserver -v indi_lx200_OnStep indi_sbig_ccd indi_asi_ccd indi_sx_wheel" >> ~/indi.sh
+chmod 777 ~/indi.sh
 
 
 #Setting up Wireless Access Point
-git clone https://github.com/oblique/create_ap
-cd create_ap
-sudo make install
+
+
+#The following commands were needed to get dnsmasq running on 18.04:
+#sudo systemctl stop systemd-resolved
+#sudo systemctl disable systemd-resolved
+#sudo rm /etc/resolv.conf
+#sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
+
+sudo apt-get -y install hostapd dnsmasq make
+
+#The following commands were needed to get dnsmasq running on 18.04:
+#sudo sed -i.bak 's/#DNSStubListener=yes/DNSStubListener=no/' /etc/systemd/resolved.conf
+#sudo systemctl reload-or-restart systemd-resolved
+#sudo systemctl reload-or-restart dnsmasq
+#sudo chattr -e /etc/resolv.conf
+#sudo chattr +i /etc/resolv.conf
+
+
+
+cd ~ && git clone https://github.com/oblique/create_ap && cd create_ap && sudo make install
 
 #configure access point id and password
 sudo sed -i.bak 's/SSID=MyAccessPoint/SSID=RPI/'  /etc/create_ap.conf 
 sudo sed -i.bak 's/PASSPHRASE=12345678/PASSPHRASE=password/'  /etc/create_ap.conf 
 
-# this step needs to be done manually:
+# For 16.04 this step needs to be done manually:
 # 1. run  ifconfig and note down the name of ethernet interface. It will be like et433hkjh5345345
 # 2. in /etc/create_ap.conf  replace eth0 by the name from the step 1
 
-sudo systemctl start create_ap
 sudo systemctl enable create_ap
-
+sudo systemctl start create_ap
+sudo systemctl status create_ap
 
 
 #configure x11vnc 
