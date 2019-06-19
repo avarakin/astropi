@@ -23,6 +23,9 @@ This project also has experimental installer, implemented as a make file.
 https://ubuntu-mate.org/raspberry-pi/
 Follow instructions up to SSH section. The script contains commands for enabling ssh too. 
 
+Looks like image for 16.04 is no longer accessible direclty on the Mate site. Here is a link which is still available:
+https://ubuntu-mate.org/raspberry-pi/ubuntu-mate-16.04.2-desktop-armhf-raspberry-pi.img.xz
+
 2. Once Raspberry is running, open terminal and run the following commands:
 ```
 sudo apt-get install git make
