@@ -26,6 +26,14 @@ Follow instructions up to SSH section. The script contains commands for enabling
 Looks like image for 16.04 is no longer accessible direclty on the Mate site. Here is a link which is still available:
 https://ubuntu-mate.org/raspberry-pi/ubuntu-mate-16.04.2-desktop-armhf-raspberry-pi.img.xz
 
+Stock 16.04.2 does not boot on RPI 3 B+.
+The following steps need to be made on working RPI 3 B after installation is complete:
+```
+sudo rpi-update
+sudo wget https://github.com/khadas/android_hardware_amlogic_wifi/raw/b6709758755568e4a0ff6e80993be0fc64c77fb9/bcm_ampak/config/6255/nvram.txt -O /lib/firmware/brcm/brcmfmac43455-sdio.txt
+```
+and then the card can be moved to RPI 3 B+.
+
 2. Once Raspberry is running, open terminal and run the following commands:
 ```
 sudo apt-get install git make
