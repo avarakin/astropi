@@ -71,6 +71,10 @@ wap :
 	systemctl enable create_ap
 	systemctl start create_ap
 	systemctl status create_ap
+	$(eval INTERFACE=$(shell sh -c ifconfig | head -1 | awk '{print $$1}'))
+	@echo Replacing network interface by: $(INTERFACE)
+	sed -i.bak 's/eth0/$(INTERFACE)/'   /etc/create_ap.conf
+
 
 # For 16.04 this step needs to be done manually:
 # 1. run  ifconfig and note down the name of ethernet interface. It will be like et433hkjh5345345
