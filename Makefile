@@ -1,6 +1,6 @@
 #.PHONY: update utils vscode
 
-all: update ssh utils indi_kstars ccdciel_skychart phd sample_startup wap vnc display_usb serial
+all: update ssh utils indi_kstars ccdciel_skychart phd sample_startup wap vnc display_usb serial groups
 
 update:
 	apt-get update && apt-get upgrade
@@ -76,14 +76,8 @@ wap :
 	sed -i.bak 's/eth0/$(INTERFACE)/'   /etc/create_ap.conf
 
 
-# For 16.04 this step needs to be done manually:
-# 1. run  ifconfig and note down the name of ethernet interface. It will be like et433hkjh5345345
-# 2. in /etc/create_ap.conf  replace eth0 by the name from the step 1
-
-
-VNC=/lib/systemd/system/x11vnc.service
-
 #configure x11vnc 
+VNC=/lib/systemd/system/x11vnc.service
 vnc :
 	echo [Unit] > $(VNC)
 	echo Description=Start x11vnc at startup. >> $(VNC)
@@ -102,7 +96,8 @@ display_usb :
 	sed -i.bak 's/#hdmi_force_hotplug=1/hdmi_force_hotplug=1/; s/#hdmi_ignore_edid=0xa5000080/hdmi_ignore_edid=0xa5000080/; s/#hdmi_group=1/hdmi_group=1/; s/##     16       1080p 60Hz/     16       1080p 60Hz/; s/#overscan_left=0/overscan_left=0/; s/#overscan_right=0/overscan_right=0/; s/#overscan_top=0/overscan_top=0/; s/#overscan_bottom=0/overscan_bottom=0/; s/#disable_overscan=1/disable_overscan=1/; s/#max_usb_current=0/max_usb_current=1/;'  /boot/config.txt
 
 #add user pi to dialout group so it can access serial ports
-#gpasswd --add pi dialout
+groups :
+	gpasswd --add pi dialout
 
 
 #Optional steps to configure the onboard serial port for controlling an external device
