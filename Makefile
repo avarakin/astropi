@@ -1,7 +1,10 @@
-.PHONY: update utils vscode
+#.PHONY: update utils vscode
+
+all: update ssh utils indi_kstars ccdciel_skychart phd sample_startup wap vnc display_usb serial
 
 update:
 	apt-get update && apt-get upgrade
+	apt-get purge unattended-upgrades
 
 #install general utilities
 utils :
@@ -74,18 +77,18 @@ wap :
 # 2. in /etc/create_ap.conf  replace eth0 by the name from the step 1
 
 
+VNC=/lib/systemd/system/x11vnc.service
+
 #configure x11vnc 
 vnc :
-	cat > /lib/systemd/system/x11vnc.service  << EOF
-	[Unit]
-	Description=Start x11vnc at startup.
-	After=multi-user.target
-	[Service]
-	Type=simple
-	ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pass -rfbport 5900 -shared
-	[Install]
-	WantedBy=multi-user.target
-	EOF
+	echo [Unit] > $(VNC)
+	echo Description=Start x11vnc at startup. >> $(VNC)
+	echo After=multi-user.target >> $(VNC)
+	echo [Service]>> $(VNC)
+	echo Type=simple>> $(VNC)
+	echo ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pass -rfbport 5900 -shared>> $(VNC)
+	echo [Install]>> $(VNC)
+	echo WantedBy=multi-user.target>> $(VNC)
 	x11vnc -storepasswd /etc/x11vnc.pass
 	systemctl enable x11vnc.service
 	systemctl start x11vnc.service
@@ -105,10 +108,3 @@ serial :
 	sh -c "echo dtoverlay=pi3-disable-bt >> /boot/config.txt"
 	systemctl stop hciuart
 	systemctl disable hciuart
-
-
-vscode :
-	wget -qO - https://packagecloud.io/headmelted/codebuilds/gpgkey | apt-key add -;
-	echo "https://packagecloud.io/headmelted/codebuilds/raspbian/ jessie main" >> /etc/apt/sources.list
-	apt-get update
-	apt-get install code-oss
