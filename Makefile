@@ -1,10 +1,16 @@
 #.PHONY: update utils vscode
 
-all: update ssh utils indi_kstars ccdciel_skychart phd sample_startup wap vnc display_usb serial groups
+pi4: update mate-desktop utils indi_kstars ccdciel_skychart phd sample_startup 
+
+#wap_18.04 vnc groups
+#display_usb serial 
+
+
+pi3: update ssh utils indi_kstars ccdciel_skychart phd sample_startup wap vnc display_usb serial groups
 
 update:
-	apt-get update && apt-get upgrade
-	apt-get purge unattended-upgrades
+	apt-get update && apt-get -y upgrade 
+	apt-get -y purge unattended-upgrades
 
 #install general utilities
 utils :
@@ -17,6 +23,10 @@ ssh :
 	systemctl status ssh
 
 
+mate-desktop :
+	sudo apt-get -y install mate-desktop lightdm
+
+
 #These steps were needed on 18.04 to get sshd working. Uncomment and run in case if you face same issue
 ssh-18.04 :
 	rm /etc/ssh/ssh*key
@@ -27,7 +37,7 @@ ssh-18.04 :
 
 #install indi and kstars
 indi_kstars :
-	apt-add-repository ppa:mutlaqja/ppa
+	apt-add-repository -y ppa:mutlaqja/ppa
 	apt-get update
 	apt-get -y install indi-full kstars-bleeding
 	apt-get -y install astrometry.net astrometry-data-tycho2 astrometry-data-2mass-08-19 astrometry-data-2mass-08-19 astrometry-data-2mass-07 astrometry-data-2mass-06 sextractor
@@ -41,7 +51,7 @@ ccdciel_skychart :
 
 #install phd2
 phd :
-	add-apt-repository ppa:pch/phd2 && apt-get update && apt-get -y install phd2 phdlogview
+	add-apt-repository -y  ppa:pch/phd2 && apt-get update && apt-get -y install phd2 phdlogview
 
 
 #create a sample INDI startup shell script
