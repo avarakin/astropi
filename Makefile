@@ -24,7 +24,7 @@ ssh :
 
 
 mate-desktop :
-	sudo apt-get -y install mate-desktop lightdm
+	sudo apt-get -y install mate-desktop mate-desktop-environment lightdm
 
 
 #These steps were needed on 18.04 to get sshd working. Uncomment and run in case if you face same issue
