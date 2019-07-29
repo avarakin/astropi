@@ -44,6 +44,7 @@ The latest firmware is everything inside master.zip “boot” folder (including
 
 
 4. Create/Update config.txt and cmdline.txt
+
 Navigate to the micro SD /boot/ partition. Create a blank cmdline.txt file with the following line:
 
 ```
@@ -60,7 +61,9 @@ dtparam=audio=on
 ```
 
 5. Final steps
-Connect Ethernet cable, put in the card into RPI and boot
+
+Connect Ethernet cable, put in the card into RPI and boot.
+It may take up to 10 minutes to boot, especially if mouse is not connected, so be patient.
 Once Raspberry is running, connect to it using ssh, with user/password : ubuntu/ubuntu
  and then run the following commands
 
@@ -104,5 +107,8 @@ Couple of things required changes in the script to support 18.04:
 1. For some reason the ssh keys were not present after the install so the script has the steps to create them.
 2. Ubuntu 18.04 comes with its own DNS server which conflicts with dnsmasq. The script has commands for disabling the DNS server and changing resolv.conf to be compatible with dnsmasq
 
+## Notes for RPI 4
+1. Server version of Ubuntu has LXD and cloud software  which is not needed so it is removed
+2. Random number generator is taking a lot of time during the boot so "haveged" is installed as part of the installer
 
 
