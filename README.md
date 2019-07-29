@@ -1,10 +1,11 @@
-## Introduction
+# Introduction
 
-This project contains instructions and shell script for setting up a Raspberry Pi as an Astrophotography computer.
+This project contains instructions and Makefile for setting up a Raspberry Pi as an Astrophotography computer.
 Both 18.4 and 16.04 versions of Ubuntu Mate are supported.
-This project also has experimental installer, implemented as a make file. 
+Experimental Raspberry Pi 4 installation is also available.
+The project originally started as a shell script, but then was migrated to makefile. Shell script is still available but not supported. 
 
-## List of features:
+# List of features:
 1. Installs most commonly used Astrophotography software:
 * INDI
 * Kstars
@@ -18,7 +19,54 @@ This project also has experimental installer, implemented as a make file.
 5. Configures USB to provide up to 1A of current to connected devices
 6. Configures the onboard serial port for controlling an external device
 
-## Steps for setting up:
+# Installing on RPI 4
+This method is based on installing Ubuntu Server and then replacing the boot
+1. Get image from:
+
+http://cdimage.ubuntu.com/ubuntu/releases/bionic/release/ubuntu-18.04.2-preinstalled-server-armhf+raspi3.img.xz
+
+1. Unpack and burn into SD Card:
+
+```
+xz -d ubuntu-18.04.2-preinstalled-server-armhf+raspi3.img.xz
+sudo ddrescue -D --force ubuntu-18.04.2-preinstalled-server-armhf+raspi3.img /dev/sdx
+```
+
+1. Download firmware from:
+
+https://github.com/raspberrypi/firmware/archive/master.zip
+
+
+1. Create/Update config.txt and cmdline.txt
+Navigate to the micro SD /boot/ partition. Create a blank cmdline.txt file with the following line:
+
+```
+dwc_otg.fiq_fix_enable=2 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait rootflags=noload net.ifnames=0
+```
+
+Next we are going to create config.txt with the following content:
+
+```
+## Enable audio (loads snd_bcm2835)
+dtparam=audio=on
+[pi4]
+[all]
+```
+
+1. Booting
+
+Connect Ethernet cable, put in the card into RPI and boot
+Login using user/password : ubuntu/ubuntu
+
+login remotely:
+
+`ssh ubuntu@192.168.1.163`
+
+`sudo apt remove flash-kernel initramfs-tools`
+
+
+
+## Steps for setting up RPi 3:
 1. Download and install Ubuntu Mate 16.04 or 18.04 from:
 https://ubuntu-mate.org/raspberry-pi/
 Follow instructions up to SSH section. The script contains commands for enabling ssh too. 
@@ -39,10 +87,8 @@ and then the card can be moved to RPI 3 B+.
 sudo apt-get install git make
 git clone https://github.com/avarakin/astropi.git
 cd astropi
-cat pi_ubuntu.sh
+sudo make pi3
 ```
-
-3. Once this is done, you can either run the whole script or copy - paste the commands to terminal one by one. At this point the script is still in testing stage, so it is recommended to run it line by line. When you run it line by line, make sure that the whole command is copied to buffer - some commands span over multiple lines or are a long single line.
 
 
 ## Notes for 18.04
