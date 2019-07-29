@@ -1,8 +1,7 @@
 #.PHONY: update utils vscode
 
-pi4: update mate-desktop utils indi_kstars ccdciel_skychart phd sample_startup 
+pi4: update mate-desktop utils indi_kstars ccdciel_skychart phd sample_startup wap_18.04 vnc groups
 
-#wap_18.04 vnc groups
 #display_usb serial 
 
 
@@ -24,7 +23,13 @@ ssh :
 
 
 mate-desktop :
-	sudo apt-get -y install mate-desktop mate-desktop-environment lightdm
+	apt-get -y install mate-desktop-environment lightdm
+	apt-get -y remove lxd lxd-client
+	apt-get purge cloud-init
+	rm -rf /etc/cloud/
+	rm -rf /var/lib/cloud/
+	apt-get -y install haveged
+	systemctl enable haveged
 
 
 #These steps were needed on 18.04 to get sshd working. Uncomment and run in case if you face same issue
@@ -108,6 +113,10 @@ display_usb :
 #add user pi to dialout group so it can access serial ports
 groups :
 	gpasswd --add pi dialout
+
+groups-pi4 :
+	gpasswd --add ubuntu dialout
+
 
 
 #Optional steps to configure the onboard serial port for controlling an external device
