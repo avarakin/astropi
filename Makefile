@@ -1,9 +1,8 @@
 #.PHONY: update utils vscode
 
-pi4: update mate-desktop utils indi_kstars ccdciel_skychart phd sample_startup wap_18.04 vnc groups
+pi4: update mate-desktop utils indi_kstars ccdciel_skychart phd wap_18.04 vnc groups-pi4
 
 #display_usb serial 
-
 
 pi3: update ssh utils indi_kstars ccdciel_skychart phd sample_startup wap vnc display_usb serial groups
 
