@@ -3,7 +3,7 @@
 This project contains instructions and Makefile for setting up a Raspberry Pi as an Astrophotography computer.
 Both 18.4 and 16.04 versions of Ubuntu Mate are supported.
 Experimental Raspberry Pi 4 installation is also available.
-The project originally started as a shell script, but then was migrated to makefile. Shell script is still available but not supported. 
+The project originally started as a shell script, but then was migrated to makefile. Shell script is still available but not updated. 
 
 # List of features:
 1. Installs most commonly used Astrophotography software:
@@ -20,24 +20,30 @@ The project originally started as a shell script, but then was migrated to makef
 6. Configures the onboard serial port for controlling an external device
 
 # Installing on RPI 4
-This method is based on installing Ubuntu Server and then replacing the boot
+This method is based on installing Ubuntu Server and then replacing the firmware by Raspbian firmware and is based on the following instructions:
+
+https://jamesachambers.com/raspberry-pi-ubuntu-server-18-04-2-installation-guide/
+
 1. Get image from:
 
 http://cdimage.ubuntu.com/ubuntu/releases/bionic/release/ubuntu-18.04.2-preinstalled-server-armhf+raspi3.img.xz
 
-1. Unpack and burn into SD Card:
+2. Unpack and burn into SD Card:
 
 ```
 xz -d ubuntu-18.04.2-preinstalled-server-armhf+raspi3.img.xz
 sudo ddrescue -D --force ubuntu-18.04.2-preinstalled-server-armhf+raspi3.img /dev/sdx
 ```
+Insert/mount the micro SD card in your computer and navigate to the “boot” partition. Delete everything in the existing folder so it is completely empty.
 
-1. Download firmware from:
+3. Download firmware from:
 
 https://github.com/raspberrypi/firmware/archive/master.zip
 
+The latest firmware is everything inside master.zip “boot” folder (including subfolders). We want to extract everything from “boot” (including subfolders) to our micro SD’s “boot” partition that we just emptied in the previous step. Don’t forget to get the “overlays” folder as that contains overlays necessary to boot correctly.
 
-1. Create/Update config.txt and cmdline.txt
+
+4. Create/Update config.txt and cmdline.txt
 Navigate to the micro SD /boot/ partition. Create a blank cmdline.txt file with the following line:
 
 ```
@@ -53,17 +59,19 @@ dtparam=audio=on
 [all]
 ```
 
-1. Booting
-
+5. Final steps
 Connect Ethernet cable, put in the card into RPI and boot
-Login using user/password : ubuntu/ubuntu
+Once Raspberry is running, connect to it using ssh, with user/password : ubuntu/ubuntu
+ and then run the following commands
 
-login remotely:
-
-`ssh ubuntu@192.168.1.163`
-
-`sudo apt remove flash-kernel initramfs-tools`
-
+```
+sudo apt remove flash-kernel initramfs-tools
+sudo apt-get install git make
+git clone https://github.com/avarakin/astropi.git
+cd astropi
+sudo make pi4
+```
+This will take an hour or so. It may ask some questions, so monitor the process.
 
 
 ## Steps for setting up RPi 3:
