@@ -109,6 +109,8 @@ Couple of things required changes in the script to support 18.04:
 
 ## Notes for RPI 4
 1. Server version of Ubuntu has LXD and cloud software  which is not needed so it is removed
-2. Random number generator is taking a lot of time during the boot so "haveged" is installed as part of the installer
+2. Random number generator is taking a lot of time during the boot so "haveged" random generator is installed as part of the installer script
+3. Wifi and logitech wireless mouse/keyboard are not working. Need to install raspbian drivers
+
 
 
