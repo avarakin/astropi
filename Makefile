@@ -9,6 +9,10 @@ pi3: update ssh utils indi_kstars ccdciel_skychart phd sample_startup wap vnc di
 update:
 	apt-get update && apt-get -y upgrade 
 	apt-get -y purge unattended-upgrades
+	
+update_firmware:
+	git clone --depth 1 https://github.com/raspberrypi/firmware
+	cp -r firmware/boot/* /boot/firmware/
 
 #install general utilities
 utils :
