@@ -13,6 +13,7 @@ update:
 update_firmware:
 	git clone --depth 1 https://github.com/raspberrypi/firmware
 	cp -r firmware/boot/* /boot/firmware/
+	cp -r firmware/modules/* /lib/modules
 
 #install general utilities
 utils :
