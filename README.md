@@ -58,6 +58,11 @@ Next we are going to create config.txt with the following content:
 dtparam=audio=on
 [pi4]
 [all]
+hdmi_force_hotplug=1
+hdmi_ignore_edid=0xa5000080
+hdmi_group=2
+hdmi_mode=82
+disable_overscan=1
 ```
 
 5. Final steps
