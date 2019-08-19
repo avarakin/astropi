@@ -6,6 +6,10 @@ pi4: update mate-desktop utils indi_kstars ccdciel_skychart phd vnc groups-pi4
 
 pi3: update ssh utils indi_kstars ccdciel_skychart phd sample_startup wap vnc display_usb serial groups
 
+pc: update  utils indi_kstars ccdciel_skychart phd
+
+
+
 update:
 	apt-get update && apt-get -y upgrade 
 	apt-get -y purge unattended-upgrades
@@ -17,7 +21,7 @@ update_firmware:
 
 #install general utilities
 utils :
-	apt-get -y install mc git vim ssh x11vnc zsh synaptic fonts-roboto chromium-browser terminator
+	apt-get -y install mc git vim ssh x11vnc zsh synaptic fonts-roboto chromium-browser terminator remmina
 
 #enable ssh
 ssh :
@@ -130,3 +134,23 @@ serial :
 	sh -c "echo dtoverlay=pi3-disable-bt >> /boot/config.txt"
 	systemctl stop hciuart
 	systemctl disable hciuart
+
+
+
+#Extra software
+nikola:
+	apt-get install virtualenv
+	virtualenv -p python3.7  nikola
+	cd nikola
+	source bin/activate
+	pip install --upgrade pip setuptools wheel
+	pip install --upgrade "Nikola[extras]"
+
+joplin:
+	wget -O - https://raw.githubusercontent.com/laurent22/joplin/master/Joplin_install_and_update.sh | bash
+
+joplin_cli:
+	sudo apt-get install -y npm
+	NPM_CONFIG_PREFIX=~/.joplin-bin npm install -g joplin
+	sudo ln -s ~/.joplin-bin/bin/joplin /usr/bin/joplin
+
