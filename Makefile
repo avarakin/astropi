@@ -8,7 +8,8 @@ pi3: update ssh utils indi_kstars ccdciel_skychart phd sample_startup wap vnc di
 
 pc: update  utils indi_kstars ccdciel_skychart phd
 
-
+disable_auto_mount_of_dslr:
+	gsettings set org.mate.media-handling automount false
 
 update:
 	apt-get update && apt-get -y upgrade 
