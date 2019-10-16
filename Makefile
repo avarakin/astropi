@@ -1,6 +1,6 @@
 #.PHONY: update utils vscode
 
-pi4: update mate-desktop utils indi_kstars ccdciel_skychart phd vnc groups-pi4
+pi4: update pi4_setup utils indi_kstars ccdciel_skychart phd vnc groups-pi4
 
 #display_usb serial 
 
@@ -30,7 +30,7 @@ ssh :
 	systemctl status ssh
 
 
-mate-desktop :
+pi4_setup :
 	apt-get -y install mate-desktop-environment lightdm
 	apt-get -y remove lxd lxd-client
 	apt-get purge cloud-init
@@ -38,7 +38,8 @@ mate-desktop :
 	rm -rf /var/lib/cloud/
 	apt-get -y install haveged
 	systemctl enable haveged
-
+	#fix wireless
+	sudo sed -i "s:0x48200100:0x44200100:g" /lib/firmware/brcm/brcmfmac43455-sdio.txt
 
 #These steps were needed on 18.04 to get sshd working. Uncomment and run in case if you face same issue
 ssh-18.04 :
