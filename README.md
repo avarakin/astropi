@@ -2,7 +2,7 @@
 
 This project contains instructions and Makefile for setting up a Raspberry Pi as an Astrophotography computer.
 Both 18.4 and 16.04 versions of Ubuntu Mate are supported.
-Experimental Raspberry Pi 4 installation is also available.
+Experimental Raspberry Pi 4 installation is also available. It is based on Ubuntu Server.
 The project originally started as a shell script, but then was migrated to makefile. Shell script is still available but not updated. 
 
 # List of features:
@@ -81,6 +81,11 @@ sudo make pi4
 ```
 This will take an hour or so. It may ask some questions, so monitor the process.
 
+6. Update firmware
+Finally, you may want to update the firmware and install modules:
+```
+sudo make update_firmware
+```
 
 ## Steps for setting up RPi 3:
 1. Download and install Ubuntu Mate 16.04 or 18.04 from:
