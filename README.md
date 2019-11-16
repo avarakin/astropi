@@ -3,7 +3,7 @@
 This project contains instructions and Makefile for setting up a Raspberry Pi as an Astrophotography computer.
 Both 18.4 and 16.04 versions of Ubuntu Mate are supported.
 Experimental Raspberry Pi 4 installation is also available. It is based on Ubuntu Server.
-The project originally started as a shell script, but then was migrated to makefile. Shell script is still available but not updated. 
+The project originally started as a shell script, but then was migrated to makefile. 
 
 # List of features:
 1. Installs most commonly used Astrophotography software:
