@@ -1,6 +1,6 @@
 # Introduction
 
-**Warning: this project is outdated and kept here only for reference. It is recommended to use the following project in case if you want to setup Astro imaging software on Raspberry Pi 4: https://github.com/avarakin/AstroPiMaker4  The sampe project shoudl work for Pi 3, although I have not tested it**
+**Warning: this project is outdated and kept here only for reference. It is recommended to use the following project in case if you want to setup Astro imaging software on Raspberry Pi 4: https://github.com/avarakin/AstroPiMaker4  The sampe project should work for Pi 3, although I have not tested it**
 
 This project contains instructions and Makefile for setting up a Raspberry Pi as an Astrophotography computer.
 Both 18.4 and 16.04 versions of Ubuntu Mate are supported.
